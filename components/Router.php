@@ -20,16 +20,15 @@ class Router
 
     public function resolve(bool $canaccess)
     {                        
-        try {
-            if($canaccess){
+        try {           
+            if($canaccess && $this->checkIfAdmin()){
                 
-                $class = '\SampleWebApp\views\privatePages\\' . $this->path . '\Controller';                                             
+                $class = '\SampleWebApp\views\adminPages\\' . $this->getAdminPath() . '\Controller';                                             
                 $controller = new $class($this->app);            
                 $method = $this->method;
                 $controller->$method();
-            }else{
-                $this->app->error ="Cant access this page";                
-                $class = '\SampleWebApp\views\publicPages\error\Controller';                             
+            }else{                
+                $class = '\SampleWebApp\views\publicPages\\'.$this->path.'\Controller';                             
                 $controller = new $class($this->app);            
                 $method = $this->method;
                 $controller->$method();
@@ -44,6 +43,20 @@ class Router
             $controller = new $class($this->app);
             $controller->$this->method();
          }
+    }
+
+    public function checkIfAdmin(){
+        $paths = explode('/', $this->path);
+        if($paths[0] == 'admin'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getAdminPath(){
+        $paths = explode('/', $this->path);
+        return $paths[1];
     }
 
     

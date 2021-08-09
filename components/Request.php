@@ -95,14 +95,16 @@ class Request
         $position = strpos($path, '?');
 
         if ($position !== false) {
-            $path = substr($path, 0, $position);            
-        } 
-
+            $path = substr($path, 0, $position);
+        } else{
+            $path = substr($path, 1, strlen($path));
+        }
+        
         if ($path == "/") {
             $path = "main";
         }
-
-        return str_replace("/", "", $path);
+      
+        return $path;
     }
 
     function url()

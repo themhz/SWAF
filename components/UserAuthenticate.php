@@ -21,10 +21,7 @@ class UserAuthenticate extends User
      */
     public function authenticate(): object
     {
-        $userrbody = $this->request->body();
-        $this->result = null;
-        $this->result = (object) ["error" => "user not in database", "errorcode" => 1];
-
+        $userrbody = $this->request->body();            
 
         if (isset($userrbody['username']) && isset($userrbody['password'])) {
             $user = new userModel();

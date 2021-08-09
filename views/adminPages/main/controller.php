@@ -1,5 +1,5 @@
 <?php
-namespace SampleWebApp\views\privatePages\products;
+namespace SampleWebApp\views\adminPages\main;
 use SampleWebApp\components\Controller as baseController;
 use SampleWebApp\components\View;
 
@@ -11,11 +11,11 @@ class Controller extends baseController{
 
     public function post(){        
         
-        echo "products";
+      
     }
 
     public function get(){
-        echo "products";
+        echo "main";
         // $params = $this->app->body();
         // $view = new view($this->request->app);
         // echo $view->render('main', $this->app->request->path() , $params);

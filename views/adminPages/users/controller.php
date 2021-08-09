@@ -1,5 +1,5 @@
 <?php
-namespace SampleWebApp\views\privatePages\users;
+namespace SampleWebApp\views\adminPages\users;
 use SampleWebApp\components\Controller as baseController;
 use SampleWebApp\components\View;
 

@@ -42,7 +42,7 @@ class App
     public function start()
     {
         // 1. Load requested HTTP Method [get,post,etc..] and fields from the request or messagebody
-        $this->request = new Request();
+        $this->request = new Request();        
 
         // 2. Authenticate the user request and get userData
         $this->user = new UserAuthenticate($this->request);        
@@ -60,14 +60,11 @@ class App
         $sessionPath = new SessionPaths();
         $sessionPath->set($userPaths);
         
-        // 6.Route the user to the corresponding controller
-        $router = new Router($this);
+        // 6. Route the user to the corresponding controller
+        $router = new Router($this);                
         $router->resolve($this->paths->validate($this->request->path(), $sessionPath->get()));
         
-        $this->end();
+       
     }
-
-    public function end(){
-
-    }
+    
 }

@@ -47,6 +47,14 @@ class UserPaths extends User
     public function validate($path, $paths): bool
     {
 
-        return in_array($path, (array)$paths);
+    
+        $p = explode('/', $path);
+        if($p[0]=="admin") {
+            return in_array($p[1], (array)$paths);
+        }else{
+            return in_array($p[0], (array)$paths);
+        }
+        
+        
     }
 }
