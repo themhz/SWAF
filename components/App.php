@@ -10,8 +10,6 @@ use SampleWebApp\components\SessionPaths;
 
 class App
 {
-
-
     public $config = CONFIG;
     public $rootpath;
     public $error;
@@ -40,7 +38,7 @@ class App
      * @return void
      */
     public function start()
-    {
+    {        
         // 1. Load requested HTTP Method [get,post,etc..] and fields from the request or messagebody
         $this->request = new Request();        
 

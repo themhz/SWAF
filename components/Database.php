@@ -18,7 +18,6 @@
  */
 
 namespace SampleWebApp\components;
-use SampleWebApp\Config;
 use \PDO;
 use \DateTime;
 
@@ -34,9 +33,7 @@ class Database
         $password = CONFIG['db.password'];
         $dbhost = CONFIG['db.host'];
         $basename = CONFIG['db.name'];
-        $this->dbh = new PDO("mysql:host=$dbhost;dbname=$basename", $user, $password, 
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true)
-            );
+        $this->dbh = new PDO("mysql:host=$dbhost;dbname=$basename", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true));
 
         $now = new DateTime();
         $mins = $now->getOffset() / 60;
