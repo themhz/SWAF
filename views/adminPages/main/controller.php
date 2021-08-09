@@ -10,7 +10,7 @@ class Controller extends baseController{
     }
 
     public function post(){        
-        
+        echo "main";
       
     }
 

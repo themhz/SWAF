@@ -38,10 +38,11 @@ class Router
          } catch (\Throwable $e) {
             echo $e->getMessage();
             $this->app->response->setStatusCode(404);
-            $class = '\SampleWebApp\views\publicPages\error\Controller';
             $this->app->error =$e->getMessage();
+
+            $class = '\SampleWebApp\views\publicPages\error\Controller';            
             $controller = new $class($this->app);
-            $controller->$this->method();
+            $controller->get();
          }
     }
 
