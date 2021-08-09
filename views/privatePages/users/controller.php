@@ -1,5 +1,5 @@
 <?php
-namespace SampleWebApp\views\privatePages\main;
+namespace SampleWebApp\views\privatePages\users;
 use SampleWebApp\components\Controller as baseController;
 use SampleWebApp\components\View;
 
@@ -15,7 +15,7 @@ class Controller extends baseController{
     }
 
     public function get(){
-        echo "main";
+        echo "users";
         // $params = $this->app->body();
         // $view = new view($this->request->app);
         // echo $view->render('main', $this->app->request->path() , $params);

@@ -23,21 +23,17 @@
  */
 
 namespace SampleWebApp\components;
-use SampleWebApp\components\response;
 
-class Http
+class Request
 {
-    protected $method;
-    protected $body;
-    public response $response;
-
+   
+    public string $method;
     /**
      * initialize the http method
      */
     public function __construct()
     {                
-        $this->method = $_SERVER['REQUEST_METHOD'];        
-        $this->response = new Response();
+        $this->method = $_SERVER['REQUEST_METHOD'];                
     }
 
     /**

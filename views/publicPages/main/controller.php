@@ -11,15 +11,19 @@ class Controller extends baseController{
 
     public function post(){        
         
-        $params = $this->app->body();
-        $view = new view($this->app);
-        echo $view->render('main', $this->app->path() , $params);
+        echo "this is the main";
+        
+        // $params = $this->app->request->body();
+        // $view = new view($this->app);
+        // echo $view->render('main', $this->app->request->path() , $params);
     }
 
     public function get(){
-        $params = $this->app->body();
-        $view = new view($this->app);
-        echo $view->render('main', $this->app->path() , $params);
+        echo "this is the main";
+
+        // $params = $this->app->body();
+        // $view = new view($this->request->app);
+        // echo $view->render('main', $this->app->request->path() , $params);
     }
 
     public function put(){

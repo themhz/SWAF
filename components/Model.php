@@ -18,7 +18,9 @@ class Model
 
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
-                $this->{$key} = $value;
+                if(isset($value)){
+                    $this->{$key} = $value;
+                }                
             }
         }
     }

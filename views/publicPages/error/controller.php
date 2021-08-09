@@ -11,13 +11,13 @@ class Controller extends baseController{
 
     public function post(){        
         
-        $params = ['error'=> $this->app->error] + $this->app->body();
+        $params = ['error'=> $this->app->error] + $this->app->request->body();
         $view = new view($this->app);
-        echo $view->render('main', 'errr' , $params);
+        echo $view->render('main', 'error' , $params);
     }
 
     public function get(){
-        $params = ['error'=>  $this->app->error] + $this->app->body();
+        $params = ['error'=>  $this->app->error] + $this->app->request->body();
         $view = new view($this->app);
         echo $view->render('main', 'error' , $params);
     }
@@ -29,4 +29,5 @@ class Controller extends baseController{
     public function delete(){
         echo "delete";
     }
+    
 }
