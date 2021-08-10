@@ -1,8 +1,9 @@
+Simple Web Application Framwork SWAF  
+----------------------------------------------------------------  
 This is a simple web application framework
 
 Web server runs index.php and loads the classes that are needed 
 
-What it does?
 
 1. It creates an object of the web application
     $wa = new webApplication();
