@@ -5,8 +5,6 @@ namespace SampleWebApp\components;
 use SampleWebApp\components\UserAuthenticate;
 use SampleWebApp\components\Request;
 use SampleWebApp\components\SessionData;
-use SampleWebApp\components\SessionPaths;
-
 
 class App
 {
