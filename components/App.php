@@ -1,10 +1,33 @@
 <?php
 
+/* 
+ * Copyright (C) 2021 themhz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 namespace SampleWebApp\components;
 
 use SampleWebApp\components\UserAuthenticate;
 use SampleWebApp\components\Request;
-use SampleWebApp\components\SessionData;
+/**
+* About
+* ----------------------------------------------------------------
+* Initialize the web application components
+* It is where everything begins. Start reading fromt he start method
+
+*/
 
 class App
 {
@@ -29,10 +52,8 @@ class App
      * Basic sequence of tasks that will be executed when the application runs
      * 1. Load requested HTTP Method [get,post,etc..] and fields from the request or messagebody
      * 2. Authenticate the user request and get userData
-     * 3. Set session for userData
-     * 4. Get User paths
-     * 5. Set session for userPath
-     * 6. Route the user to the corresponding controller
+     * 3. Set session variables that are user details loaded from the database
+     * 4. Route the user to the corresponding controller     
      * 
      * @return void
      */
@@ -65,11 +86,12 @@ class App
 
     public function setSessionVariables() : void
     {        
-        $sessionData = new SessionData();
-        $sessionData->set($this->user);
+        $session = new Session();
+      
+        $session->set($this->user);
 
         $this->userPaths = new UserPaths($this->request);
-        $this->userPaths->get($sessionData->get());
+        $this->userPaths->get($session->get());
     }
 
     public function route() : void

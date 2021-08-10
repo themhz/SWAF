@@ -35,15 +35,15 @@ class Database
         $basename = CONFIG['db.name'];
         $this->dbh = new PDO("mysql:host=$dbhost;dbname=$basename", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true));
 
-        $now = new DateTime();
-        $mins = $now->getOffset() / 60;
-        $sgn = ($mins < 0 ? -1 : 1);
-        $mins = abs($mins);
-        $hrs = floor($mins / 60);
-        $mins -= $hrs * 60;
-        $offset = sprintf('%+d:%02d', $hrs*$sgn, $mins);
-        $this->dbh->exec("SET time_zone='$offset';");
-  
+        // $now = new DateTime();
+        // $mins = $now->getOffset() / 60;
+        // $sgn = ($mins < 0 ? -1 : 1);
+        // $mins = abs($mins);
+        // $hrs = floor($mins / 60);
+        // $mins -= $hrs * 60;
+        // $offset = sprintf('%+d:%02d', $hrs*$sgn, $mins);
+        // $this->dbh->exec("SET time_zone='$offset';");
+          
         $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
