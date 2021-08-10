@@ -1,7 +1,4 @@
-HTEWAC 
-What is HTEWAC 
-HTEWAC means 
-How to execute web application code in index.php
+This is a simple web application framework
 
 Web server runs index.php and loads the classes that are needed 
 

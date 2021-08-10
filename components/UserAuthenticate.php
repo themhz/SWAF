@@ -20,7 +20,7 @@ class UserAuthenticate extends User
      *
      * @return array
      */
-    public function authenticate(): object
+    public function authenticate(): void
     {        
         $userrbody = $this->request->body();
         
@@ -36,9 +36,11 @@ class UserAuthenticate extends User
 
         if (!empty($this->result) && $this->password->verify($this->result->password)) {
             $this->result->errorcode = 0;
-            return (object)$this->result;
+            //return (object)$this->result;
         } else {
-            return (object)["error" => "user not in database", "errorcode" => 1];
+            //return (object)["error" => "user not in database", "errorcode" => 1];
+            $this->result = (object)["error" => "user not in database", "errorcode" => 1];
         }
     }
+   
 }

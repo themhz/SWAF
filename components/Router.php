@@ -19,48 +19,60 @@ class Router
     }
 
     public function resolve(bool $canaccess)
-    {                        
-        try {           
-            if($canaccess && $this->checkIfAdmin()){
-                
-                $class = '\SampleWebApp\views\adminPages\\' . $this->getAdminPath() . '\Controller';                                             
-                $controller = new $class($this->app);            
+    {
+        try {
+            if (!$this->checkIfPageIsAdmin()) {
+                $class = '\SampleWebApp\views\publicPages\\' . $this->getPath() . '\Controller';
+                $controller = new $class($this->app);
                 $method = $this->method;
                 $controller->$method();
-            }else{                
-                $class = '\SampleWebApp\views\publicPages\\'.$this->path.'\Controller';                             
-                $controller = new $class($this->app);            
+            } else if ($canaccess) {
+                $class = '\SampleWebApp\views\adminPages\\' . $this->getAdminPath() . '\Controller';
+                $controller = new $class($this->app);
                 $method = $this->method;
                 $controller->$method();
+            } else {
+                $this->app->response->setStatusCode(403);
+                $this->app->error = "You cant access this page";
+
+                $class = '\SampleWebApp\views\publicPages\error\Controller';
+                $controller = new $class($this->app);
+                $controller->get();
             }
-            
-
-         } catch (\Throwable $e) {
-            echo $e->getMessage();
+        } catch (\Throwable $e) {            
             $this->app->response->setStatusCode(404);
-            $this->app->error =$e->getMessage();
+            $this->app->error = $e->getMessage();
 
-            $class = '\SampleWebApp\views\publicPages\error\Controller';            
+            $class = '\SampleWebApp\views\publicPages\error\Controller';
             $controller = new $class($this->app);
             $controller->get();
-         }
+        }
     }
 
-    public function checkIfAdmin(){
+    public function checkIfPageIsAdmin()
+    {
         $paths = explode('/', $this->path);
-        if($paths[0] == 'admin'){
+        if ($paths[0] == 'admin') {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function getAdminPath(){
+    public function getAdminPath()
+    {
         $paths = explode('/', $this->path);
+        if (!isset($paths[1]) ||  $paths[1]== "")
+            $paths[1] = 'main';
+          
         return $paths[1];
     }
 
-    
+    public function getPath()
+    {
+        if ($this->path == "")
+            $this->path = 'main';
 
-    
+        return $this->path;
+    }
 }
