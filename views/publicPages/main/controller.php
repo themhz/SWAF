@@ -1,43 +1,43 @@
 <?php
+
 namespace SampleWebApp\views\publicPages\main;
+
 use SampleWebApp\components\Controller as baseController;
 use SampleWebApp\components\View;
+use SampleWebApp\components\FileUploader;
+
 use SampleWebApp\models\Products;
 
-class Controller extends baseController{
-    
-    public function __construct($app) {
+class Controller extends baseController
+{
+
+    public function __construct($app)
+    {
         parent::__construct($app);
     }
 
-    public function post(){        
+    public function post()
+    {
+        $target_dir = $this->app->rootpath . DIRECTORY_SEPARATOR . 'SampleWebApp/views/' . DIRECTORY_SEPARATOR . 'publicPages' . DIRECTORY_SEPARATOR . 'userfiles' . DIRECTORY_SEPARATOR;
+        $fileUploader = new FileUploader($target_dir);
+        $fileUploader->upload();
         
-        echo "this is the main";
-        $p = new Products();
-
-        print_r($p->select());
-        // $params = $this->app->request->body();
-        // $view = new view($this->app);
-        // echo $view->render('main', $this->app->request->path() , $params);
     }
 
-    public function get(){
-        echo "this is the main";
-        $p = new Products();
+    public function get()
+    {
 
-        echo "<pre>";
-        print_r($p->select(['name ='=>'forema']));
-        echo "</pre>";
-        // $params = $this->app->body();
-        // $view = new view($this->request->app);
-        // echo $view->render('main', $this->app->request->path() , $params);
+        $view = new view($this->app->request);
+        echo $view->render('main', $this->app->request->path(), []);
     }
 
-    public function put(){
+    public function put()
+    {
         echo "put";
     }
 
-    public function delete(){
+    public function delete()
+    {
         echo "delete";
     }
 }

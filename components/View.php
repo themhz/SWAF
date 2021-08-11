@@ -51,7 +51,6 @@ class View
             $$key = $value;            
         }   
                  
-
         ob_start();        
         include_once "views/publicPages/$view/view.php";        
         return ob_get_clean();

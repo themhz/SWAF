@@ -53,9 +53,8 @@ class UserAuthenticate extends User
 
         if (!empty($this->result) && $this->password->verify($this->result->password)) {
             $this->result->errorcode = 0;
-            //return (object)$this->result;
-        } else {
-            //return (object)["error" => "user not in database", "errorcode" => 1];
+            
+        } else {            
             $this->result = (object)["error" => "user not in database", "errorcode" => 1];
         }
     }

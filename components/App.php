@@ -49,7 +49,8 @@ class App
     }
 
     /**
-     * Basic sequence of tasks that will be executed when the application runs
+     *    Basic Control flow of tasks that will be executed when the application runs
+     * ----------------------------------------------------------------------------------
      * 1. Load requested HTTP Method [get,post,etc..] and fields from the request or messagebody
      * 2. Authenticate the user request and get userData
      * 3. Set session variables that are user details loaded from the database
@@ -58,7 +59,7 @@ class App
      * @return void
      */
     public function start()
-    {
+    {        
         // 1. Load requested HTTP Method [get,post,etc..] and fields from the request or messagebody
         $this->loadRequest();
 

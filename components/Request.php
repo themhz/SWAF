@@ -100,7 +100,7 @@ class Request
             $path = substr($path, 1, strlen($path));
         }
         
-        if ($path == "/") {
+        if ($path == "/" || $path == "") {
             $path = "main";
         }
       
