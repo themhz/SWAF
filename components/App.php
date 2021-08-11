@@ -21,13 +21,14 @@ namespace SampleWebApp\components;
 
 use SampleWebApp\components\UserAuthenticate;
 use SampleWebApp\components\Request;
-/**
-* About
-* ----------------------------------------------------------------
-* Initialize the web application components
-* It is where everything begins. Start reading fromt he start method
 
-*/
+/**
+ * About
+ * ----------------------------------------------------------------
+ * Initialize the web application components
+ * It is where everything begins. Start reading fromt he start method
+
+ */
 
 class App
 {
@@ -43,9 +44,9 @@ class App
 
     public function __construct($rootpath)
     {
-        session_start();
         $this->rootpath = $rootpath;
         $this->response = new Response();
+        $this->session = new Session();
     }
 
     /**
@@ -59,45 +60,56 @@ class App
      * @return void
      */
     public function start()
-    {        
+    {
+
         // 1. Load requested HTTP Method [get,post,etc..] and fields from the request or messagebody
         $this->loadRequest();
 
         // 2. Authenticate the user request and get userData
-        $this->authenticate();        
+        $this->authenticate();
 
         // 3. Set session variables that are user details loaded from the database
         $this->setSessionVariables();       
 
+
+        //print_r($_SESSION);
         // 4. Route the user to the corresponding controller
         $this->route();
+
+
     }
 
-    public function loadRequest() : void
+    public function loadRequest(): void
     {
         $this->request = new Request();
     }
 
-    public function authenticate() : void
+    public function authenticate(): void
     {
-        $auth = new UserAuthenticate($this->request);
-        $auth->authenticate();
-        $this->user = $auth->result;
+        if (!$this->session->get('user')->isloggedin) {
+            $auth = new UserAuthenticate($this->request);
+            $auth->authenticate();
+
+            $this->user = $auth->result;
+        } else {
+            $this->user = $this->session->get('user');
+        }
     }
 
-    public function setSessionVariables() : void
-    {        
-        $session = new Session();
-      
-        $session->set($this->user);
+    public function setSessionVariables(): void
+    {
+        if (!$this->session->get('user')->isloggedin) {
+            $this->session->set('user', $this->user);            
+        }
 
         $this->userPaths = new UserPaths($this->request);
-        $this->userPaths->get($session->get());
+        $this->userPaths->get($this->session->get('user'));
     }
 
-    public function route() : void
+    public function route(): void
     {
-        $router = new Router($this);    
+
+        $router = new Router($this);
         $router->resolve($this->userPaths->validate($this->request->path(), $this->userPaths->paths));
     }
 }

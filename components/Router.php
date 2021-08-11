@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */ 
 
 namespace SampleWebApp\components;
 
@@ -36,12 +36,12 @@ class Router
     }
 
     public function resolve(bool $canaccess)
-    {
+    {              
         try {
-            if (!$this->checkIfPageIsAdmin()) {
+            if (!$this->checkIfPageIsAdmin()) {                
                 $class = '\SampleWebApp\views\publicPages\\' . $this->getPath() . '\Controller';
                 $this->loadController($class);
-            } else if ($canaccess) {
+            } else if ($this->app->session->get('user')->isloggedin && $canaccess) {
                 $class = '\SampleWebApp\views\adminPages\\' . $this->getAdminPath() . '\Controller';
                 $this->loadController($class);
             } else {
@@ -83,6 +83,8 @@ class Router
     public function getAdminPath()
     {
         $paths = explode('/', $this->path);
+        
+        
         if (!isset($paths[1]) ||  $paths[1] == "")
             $paths[1] = 'main';
 

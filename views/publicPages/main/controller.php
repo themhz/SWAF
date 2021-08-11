@@ -20,7 +20,7 @@ class Controller extends baseController
     {
         $target_dir = $this->app->rootpath . DIRECTORY_SEPARATOR . 'SampleWebApp/views/' . DIRECTORY_SEPARATOR . 'publicPages' . DIRECTORY_SEPARATOR . 'userfiles' . DIRECTORY_SEPARATOR;
         $fileUploader = new FileUploader($target_dir);
-        $fileUploader->upload();
+        $fileUploader->multiupload();
         
     }
 

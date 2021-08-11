@@ -40,7 +40,7 @@ class UserAuthenticate extends User
     public function authenticate(): void
     {        
         $userrbody = $this->request->body();
-        
+
         if (isset($userrbody['username']) && isset($userrbody['password'])) {
             
             $this->password = new Password($userrbody['password']);
@@ -51,11 +51,17 @@ class UserAuthenticate extends User
             $this->result = isset($this->result[0]) ? $this->result[0] : $this->result;
         }    
 
+        
         if (!empty($this->result) && $this->password->verify($this->result->password)) {
             $this->result->errorcode = 0;
+            $this->result->isloggedin = true;
+            $this->result->error = "";
+            
             
         } else {            
-            $this->result = (object)["error" => "user not in database", "errorcode" => 1];
+            $this->result->errorcode = 1;
+            $this->result->isloggedin = false;
+            $this->result->error = "user not in database";            
         }
     }
    

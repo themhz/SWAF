@@ -12,7 +12,7 @@ class FileUploader
     }
 
     public function upload()
-    {        
+    {
 
         $target_file = $this->path . basename($_FILES["fileToUpload"]["name"]);
 
@@ -60,6 +60,22 @@ class FileUploader
                 echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
             } else {
                 echo "Sorry, there was an error uploading your file.";
+            }
+        }
+    }
+
+    public function multiupload()
+    {
+        if (isset($_POST['submit'])) {
+            // Count total files
+            $countfiles = count($_FILES['file']['name']);
+
+            // Looping all files
+            for ($i = 0; $i < $countfiles; $i++) {
+                $filename = $_FILES['file']['name'][$i];
+
+                // Upload file
+                move_uploaded_file($_FILES['file']['tmp_name'][$i], $this->path . $filename);
             }
         }
     }
