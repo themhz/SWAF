@@ -17,11 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace SampleWebApp\components;
+namespace swaf\components\handlers;
 
-use SampleWebApp\models\User as userModel;
-use SampleWebApp\components\Request;
-use SampleWebApp\components\Password;
+
+use swaf\components\handlers\Request;
+use swaf\components\handlers\Password;
+
+use swaf\models\UserLogin;
+use swaf\models\User as userModel;
 
 class UserAuthenticate extends User
 {
@@ -31,6 +34,8 @@ class UserAuthenticate extends User
     public function __construct(Request $data)
     {
         parent::__construct($data);
+        $this->result = new UserLogin();
+        
     }
     /**
      * Authenticated the user
@@ -41,28 +46,52 @@ class UserAuthenticate extends User
     {        
         $userrbody = $this->request->body();
 
-        if (isset($userrbody['username']) && isset($userrbody['password'])) {
+        if (isset($userrbody['email']) && isset($userrbody['password'])) {
             
             $this->password = new Password($userrbody['password']);
             
             $user = new userModel();
-            $this->result = $user->select(['username =' => $userrbody['username']]);
+            $this->result = $user->select(['email =' => $userrbody['email']]);
             
             $this->result = isset($this->result[0]) ? $this->result[0] : $this->result;
-        }    
+        }
 
-        
-        if (!empty($this->result) && $this->password->verify($this->result->password)) {
+      
+        if (!empty($this->result) && isset($this->result->password) && $this->password->verify($this->result->password)) {
             $this->result->errorcode = 0;
             $this->result->isloggedin = true;
             $this->result->error = "";
             
             
-        } else {            
+        } else {           
+          
             $this->result->errorcode = 1;
             $this->result->isloggedin = false;
-            $this->result->error = "user not in database";            
+            $this->result->error = "user not in database";    
+            
+           
         }
+        
     }
    
+
+    /**
+     * Get the value of result
+     */ 
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * Set the value of result
+     *
+     * @return  self
+     */ 
+    public function setResult($result)
+    {
+        $this->result = $result;
+
+        return $this;
+    }
 }

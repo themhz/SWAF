@@ -1,8 +1,8 @@
 <?php
-namespace SampleWebApp\views\adminPages\main;
-use SampleWebApp\components\Controller as baseController;
-use SampleWebApp\components\View;
-use SampleWebApp\components\FileUploader;
+namespace swaf\views\adminPages\main;
+use swaf\components\core\Controller as baseController;
+use swaf\components\core\View;
+use swaf\components\core\FileUploader;
 
 
 class Controller extends baseController{
@@ -19,7 +19,7 @@ class Controller extends baseController{
         
          $view = new view($this->app->request);
          //echo $this->app->request->path();
-        echo $view->render('main', 'main', []);
+        echo $view->render('main', 'main', [], 'admin');
 
     }
 
@@ -27,7 +27,7 @@ class Controller extends baseController{
     {
 
         $view = new view($this->app->request);
-        echo $view->render('main', 'main', []);
+        echo $view->render('main', 'main', [], 'admin');
     }
 
 

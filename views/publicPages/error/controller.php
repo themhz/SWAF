@@ -1,7 +1,7 @@
 <?php
-namespace SampleWebApp\views\publicPages\error;
-use SampleWebApp\components\Controller as baseController;
-use SampleWebApp\components\View;
+namespace swaf\views\publicPages\error;
+use swaf\components\core\Controller as baseController;
+use swaf\components\core\View;
 
 class Controller extends baseController{
     

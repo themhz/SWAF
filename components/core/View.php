@@ -17,43 +17,51 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace SampleWebApp\components;
+namespace swaf\components\core;
+
+use swaf\components\handlers\Session;
 
 class View
 {
 
-   
+
     public function __construct()
     {
-        
     }
 
-    public function render($layout = 'main', $view = "", $params=[]){
+    public function render($layout = 'main', $view = "", $params = [], $acceess = 'public')
+    {
+
 
         $layoutContent = $this->layout($layout, $params);
-        
-        $viewContent = $this->view($view, $params);
-                
+        $viewContent = $this->view($view, $params, $acceess);
         return str_replace('{{VIEW}}', $viewContent, $layoutContent);
     }
 
-    protected function layout($layout = 'main', $params){
-        foreach($params as $key => $value){
+    protected function layout($layout = 'main', $params)
+    {
+        foreach ($params as $key => $value) {
             $$key = $value;
-        }   
-        ob_start();        
-        include_once "views/layouts/$layout.php";        
+        }
+
+        //make the session variables available for the layout via the session object
+        $session = 'session';
+        $$session = new Session();
+
+
+
+        ob_start();
+        include_once "views/layouts/$layout.php";
         return ob_get_clean();
     }
 
-    protected function view($view, $params){                
-        foreach($params as $key => $value){            
-            $$key = $value;            
-        }   
-                 
-        ob_start();        
-        include_once "views/publicPages/$view/view.php";        
+    protected function view($view, $params, $acceess = 'public')
+    {
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
+        ob_start();
+        include_once "views/" . $acceess . "Pages/$view/view.php";
         return ob_get_clean();
-    }  
-    
+    }
 }

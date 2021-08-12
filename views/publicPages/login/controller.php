@@ -1,31 +1,56 @@
 <?php
-namespace SampleWebApp\views\publicPages\login;
-use SampleWebApp\components\Controller as baseController;
-use SampleWebApp\components\View;
 
-class Controller extends baseController{
-    public function __construct($app) {
+namespace swaf\views\publicPages\login;
+
+use swaf\components\core\Controller as baseController;
+use swaf\components\core\View;
+use swaf\components\handlers\UserRegister;
+
+class Controller extends baseController
+{
+    public function __construct($app)
+    {
         parent::__construct($app);
     }
 
-    public function post(){
-        $params = $this->app->body();
+    public function post()
+    {
+
+
+        //print_r($this->app->request->body());
+        //$register = new UserRegister();
+        // $params = $this->app->body();
+        // print_r($this->app->session->get("user"));
+        // die();
         $view = new view($this->app);
-        echo $view->render('main', $this->app->path() , $params);
+        echo $view->render('main', 'main', $this->app->session->get("user"));
     }
 
-    public function get(){
-
-         //$params = $this->app->body();
+    public function get()
+    {
+        $this->isLogout();
         $view = new view();
-        echo $view->render('main', $this->app->path() , []);
+        echo $view->render('main', 'login', []);
     }
 
-    public function put(){
+    public function put()
+    {
         echo "put";
     }
 
-    public function delete(){
+    public function delete()
+    {
         echo "delete";
+    }
+
+
+    public function isLogout()
+    {       
+        $params = (object)$this->app->request->body();
+           
+        if (isset($params->logout) && $params->logout == 1) {
+            $this->app->session->clear();
+            header('Location: ' . 'main');            
+        }
     }
 }

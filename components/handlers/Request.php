@@ -16,24 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- 
+
 /**
  * @author Eythimios Theotokatos <themhz@email.com>
  * @about http This is an http class that is used to get the http method request, the body in a safe way
  */
 
-namespace SampleWebApp\components;
+namespace swaf\components\handlers;
 
 class Request
 {
-   
+
     public string $method;
     /**
      * initialize the http method
      */
     public function __construct()
-    {                
-        $this->method = $_SERVER['REQUEST_METHOD'];                
+    {
+        $this->method = $_SERVER['REQUEST_METHOD'];
     }
 
     /**
@@ -41,7 +41,7 @@ class Request
      *
      * @return string of the requested HTTP method in lower case
      */
-    public function method() : string
+    public function method(): string
     {
         return strtolower($this->method);
     }
@@ -51,7 +51,7 @@ class Request
      *
      * @return array
      */
-    public function body() : array
+    public function body(): array
     {
         $body = [];
         if ($this->method() === 'get') {
@@ -95,15 +95,12 @@ class Request
         $position = strpos($path, '?');
 
         if ($position !== false) {
-            $path = substr($path, 0, $position);
-        } else{
-            $path = substr($path, 1, strlen($path));
+            $path = substr($path, 0, $position);           
         }
-        
-        if ($path == "/" || $path == "") {
-            $path = "main";
+
+        if ($path == "/" || $path == "") {         
+            $path = 'main';
         }
-      
         return $path;
     }
 

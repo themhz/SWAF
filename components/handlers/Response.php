@@ -1,5 +1,4 @@
 <?php
-
 /* 
  * Copyright (C) 2021 themhz
  *
@@ -17,37 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace SampleWebApp\components;
+namespace swaf\components\handlers;
 
-use SampleWebApp\models\User as userModel;
-use SampleWebApp\components\Request;
-
-class UserRegister extends User
+//This is the response class that for now only returns the response code such as 404 or 200
+class Response
 {
-
-    public $result;
-
-    public function __construct(Request $data)
-    {
-        parent::__construct($data);
-    }
-    /**
-     * Register the user
-     *
-     * @return array
-     */
-    public function register()
-    {
-        $user = new userModel();
-        $userrbody = $this->request->body();
-
-        if (isset($userrbody['username']) && isset($userrbody['password'])) {
-
-            $user->firstname = "tasos";
-            $user->lastname = "vagelis";
-        }
-
-
-        $user->insert();
+    public function setStatusCode(int $code){
+        http_response_code($code);
     }
 }

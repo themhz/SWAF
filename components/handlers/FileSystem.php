@@ -1,6 +1,6 @@
 <?php
 
-namespace SampleWebApp\components;
+namespace swaf\components\handlers;
 
 class FileSystem
 {
@@ -196,4 +196,6 @@ class FileSystem
 
         return $this;
     }
+
+
 }

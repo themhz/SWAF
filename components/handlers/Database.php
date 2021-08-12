@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace SampleWebApp\components;
+namespace swaf\components\handlers;
 use \PDO;
 use \DateTime;
 

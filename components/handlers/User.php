@@ -17,11 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace SampleWebApp\components;
+namespace swaf\components\handlers;
 
-use SampleWebApp\models\User as userModel;
-use SampleWebApp\models\User_paths;
-use SampleWebApp\components\Request;
+use swaf\components\handlers\Request;
 
 class User
 {
@@ -29,12 +27,51 @@ class User
     public $paths;
 
     public function __construct(Request $request)
-    {
-        $_SESSION['USER'] = ['DETAILS' => "", 'PATHS' => ""];
+    {        
         $this->request = $request;
     }
 
     
     
 
+
+    /**
+     * Get the value of request
+     */ 
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * Set the value of request
+     *
+     * @return  self
+     */ 
+    public function setRequest($request)
+    {
+        $this->request = $request;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of paths
+     */ 
+    public function getPaths()
+    {
+        return $this->paths;
+    }
+
+    /**
+     * Set the value of paths
+     *
+     * @return  self
+     */ 
+    public function setPaths($paths)
+    {
+        $this->paths = $paths;
+
+        return $this;
+    }
 }

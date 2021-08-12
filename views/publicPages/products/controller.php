@@ -1,8 +1,8 @@
 <?php
-namespace SampleWebApp\views\publicPages\products;
-use SampleWebApp\components\Controller as baseController;
-use SampleWebApp\components\View;
-use SampleWebApp\models\Products;
+namespace swaf\views\publicPages\products;
+use swaf\components\core\Controller as baseController;
+use swaf\components\core\View;
+use swaf\models\Products;
 
 class Controller extends baseController{
     

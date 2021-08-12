@@ -1,4 +1,5 @@
 <?php
+
 /* 
  * Copyright (C) 2021 themhz
  *
@@ -15,13 +16,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace swaf\components\core;
 
-namespace SampleWebApp\components;
+/**
+ * This class must and is used by every controller in the system
+ * Simply add an app attribute in order to access app stuff within the business logic
+ * 
+ */
 
-//This is the response class that for now only returns the response code such as 404 or 200
-class Response
+abstract class Controller
 {
-    public function setStatusCode(int $code){
-        http_response_code($code);
+    protected $app;
+    public function __construct($app){
+        $this->app = $app;
     }
 }

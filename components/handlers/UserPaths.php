@@ -17,11 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace SampleWebApp\components;
+namespace swaf\components\handlers;
 
-use SampleWebApp\models\User as userModel;
-use SampleWebApp\models\User_paths;
-use SampleWebApp\components\Request;
+use swaf\models\User as userModel;
+use swaf\models\User_paths;
+use swaf\components\handlers\Request;
 
 class UserPaths extends User
 {
@@ -42,7 +42,7 @@ class UserPaths extends User
         $result = null;
         $user_paths = new User_paths();
 
-        // if the user is authenticated then do this
+        // if the user is authenticated get his paths
         if ($user->errorcode == 0) {
             $result = $user_paths->select(['user_id =' => $user->id]);
             $result = isset($result[0]) ? $result : null;
@@ -75,5 +75,25 @@ class UserPaths extends User
         } else {
             return in_array($p[0], (array)$paths);
         }
+    }
+
+    /**
+     * Get the value of paths
+     */ 
+    public function getPaths()
+    {
+        return $this->paths;
+    }
+
+    /**
+     * Set the value of paths
+     *
+     * @return  self
+     */ 
+    public function setPaths($paths)
+    {
+        $this->paths = $paths;
+
+        return $this;
     }
 }

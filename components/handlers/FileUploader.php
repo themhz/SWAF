@@ -1,6 +1,6 @@
 <?php
 
-namespace SampleWebApp\components;
+namespace swaf\components\handlers;
 
 class FileUploader
 {
@@ -79,4 +79,24 @@ class FileUploader
             }
         }
     }
+
+        /**
+         * Get the value of path
+         */ 
+        public function getPath()
+        {
+                return $this->path;
+        }
+
+        /**
+         * Set the value of path
+         *
+         * @return  self
+         */ 
+        public function setPath($path)
+        {
+                $this->path = $path;
+
+                return $this;
+        }
 }
