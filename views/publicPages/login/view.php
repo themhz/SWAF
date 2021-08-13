@@ -1,6 +1,3 @@
-<?php 
-
-?>
 <div class="text-center">
   <form class="form-signin" action="login" method="POST">
 
@@ -55,3 +52,4 @@
     border-top-right-radius: 0;
   }
 </style>
+
