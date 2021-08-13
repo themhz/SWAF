@@ -61,7 +61,7 @@ class Model
                 $sql .= "'" . $value . "'";
             }
         }
-        
+             
         $sth = $db->dbh->prepare($sql);
         $sth->execute();
         $results = $sth->fetchAll(\PDO::FETCH_OBJ);

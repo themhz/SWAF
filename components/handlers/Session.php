@@ -20,8 +20,7 @@
 namespace swaf\components\handlers;
 
 class Session
-{
-    public $session;
+{    
     public function __construct(?string $cacheExpire = null, ?string $cacheLimiter = null)
     {
 
@@ -35,7 +34,7 @@ class Session
                 session_cache_expire($cacheExpire);
             }
 
-            session_start();
+            session_start();            
         }
     }
 
@@ -71,5 +70,9 @@ class Session
     public function has(string $key): bool
     {
         return array_key_exists($key, $_SESSION);
+    }
+
+    public function getAll(){
+        return $_SESSION;
     }
 }

@@ -22,46 +22,19 @@ namespace swaf\components\handlers;
 use swaf\models\User as userModel;
 use swaf\models\User_paths;
 use swaf\components\handlers\Request;
+use swaf\components\interfaces\UserDetails;
 
-class UserPaths extends User
+class Paths implements UserDetails
 {
 
     public $paths;
 
-    public function __construct(Request $data)
+    public function __construct($user)
     {
-        parent::__construct($data);
-    }
-    /**
-     * Get user Paths
-     *
-     * @return object
-     */
-    public function get($user): void
-    {
-        $result = null;
         $user_paths = new User_paths();
-
-        // if the user is authenticated get his paths
-        if ($user->errorcode == 0) {
-            $result = $user_paths->select(['user_id =' => $user->id]);
-            $result = isset($result[0]) ? $result : null;
-            $paths = [];
-
-            if (!empty($result)) {
-                foreach ($result as $value) {
-                    $paths[] = $value->path;
-                }
-            }
-        }
-
-        if (empty($paths)) {
-            $this->paths = (object)["error" => "user doesnt have any path rights", "errorcode" => 2];
-        } else {
-            $this->paths = (object) $paths;
-        }
+        $this->paths = $user_paths->select(['user_id =' => $user->id]);
     }
-
+    
     public function validate($path, $paths): bool
     {
 
@@ -79,8 +52,8 @@ class UserPaths extends User
 
     /**
      * Get the value of paths
-     */ 
-    public function getPaths()
+     */
+    public function get()
     {
         return $this->paths;
     }
@@ -89,8 +62,8 @@ class UserPaths extends User
      * Set the value of paths
      *
      * @return  self
-     */ 
-    public function setPaths($paths)
+     */
+    public function set($paths)
     {
         $this->paths = $paths;
 

@@ -58,10 +58,10 @@
 
       <ul class="navbar-nav mr-right">
         <li class="my-2 my-lg-0">
-          <a class="nav-link" href="#"><?php echo isset($session->get('user')->firstname)? $session->get('user')->firstname : ""; ?> <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#"><?php echo isset($firstname)? $firstname : ""; ?> <span class="sr-only">(current)</span></a>
         </li>
         <li class="my-2 my-lg-0">
-          <?php if (isset($session->get('user')->isloggedin) && !$session->get('user')->isloggedin) : ?>
+          <?php if (!isset($firstname)) : ?>
             <a class="nav-link" href="/login">Login</a>
           <?php else : ?>
             <a class="nav-link" href="/login?logout=1">Logout</a>

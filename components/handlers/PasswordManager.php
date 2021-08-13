@@ -19,54 +19,43 @@
 
 namespace swaf\components\handlers;
 
-use swaf\models\User as UserModel;
-use swaf\components\Handlers\Request;
-
-class UserRegister extends User
+class PasswordManager
 {
-
-    public $result;
-
-    public function __construct(Request $data)
-    {
-        parent::__construct($data);
-    }
-    /**
-     * Register the user
-     *
-     * @return array
-     */
-    public function register()
-    {
-        $user = new UserModel();
-        $userrbody = $this->request->body();
-
-        if (isset($userrbody['username']) && isset($userrbody['password'])) {
-
-            $user->firstname = "tasos";
-            $user->lastname = "vagelis";
-        }
-
-
-        $user->insert();
+    public string $password;
+    public function __construct(string $password){
+        $this->password = $password;
     }
 
+    public function hash(){
+        return password_hash($this->password, PASSWORD_DEFAULT);
+    }
+
+    public function verify($hashed_password){
+        return password_verify($this->password, $hashed_password);
+    }
+
+    public function __toString() {
+
+        return $this->password;
+    }
+
+
     /**
-     * Get the value of result
+     * Get the value of password
      */ 
-    public function getResult()
+    public function getPassword()
     {
-        return $this->result;
+        return $this->password;
     }
 
     /**
-     * Set the value of result
+     * Set the value of password
      *
      * @return  self
      */ 
-    public function setResult($result)
+    public function setPassword($password)
     {
-        $this->result = $result;
+        $this->password = $password;
 
         return $this;
     }

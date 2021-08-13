@@ -1,6 +1,6 @@
 <?php
 
-use swaf\components\App;
+use swaf\components\core\App;
 
 require 'vendor/autoload.php';
 require 'config.php';

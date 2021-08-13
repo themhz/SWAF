@@ -18,59 +18,50 @@
  */
 
 namespace swaf\components\handlers;
+use swaf\models\User;
+use swaf\components\handlers\Session;
 
-use swaf\components\handlers\Request;
 
-class User
-{
-    public $request;
-    public $paths;
-
-    public function __construct(Request $request)
-    {        
-        $this->request = $request;
+class Certificate {
+    public $certificate="";
+    
+    public function __construct($key = ""){        
+        if(!$key=="")
+            $this->create($key);
     }
 
-    
-    
-
-
-    /**
-     * Get the value of request
-     */ 
-    public function getRequest()
-    {
-        return $this->request;
+    public function isAuthorized(){
+        if(empty($this->key)){
+            return false;
+        }else{
+            return true;
+        }
     }
 
-    /**
-     * Set the value of request
-     *
-     * @return  self
-     */ 
-    public function setRequest($request)
-    {
-        $this->request = $request;
+    public function create($key){
 
+        $session = new Session();
+        $session->set('certificate', $key);
+        $this->certificate = $session->get('certificate');
         return $this;
     }
 
     /**
-     * Get the value of paths
+     * Get the value of key
      */ 
-    public function getPaths()
+    public function getKey()
     {
-        return $this->paths;
+        return $this->key;
     }
 
     /**
-     * Set the value of paths
+     * Set the value of key
      *
      * @return  self
      */ 
-    public function setPaths($paths)
+    public function setKey($key)
     {
-        $this->paths = $paths;
+        $this->key = $key;
 
         return $this;
     }

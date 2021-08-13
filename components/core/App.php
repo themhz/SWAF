@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace swaf\Components;
+namespace swaf\Components\core;
 
-use swaf\components\handlers\UserAuthenticate;
+use swaf\components\handlers\Authenticate;
 use swaf\components\handlers\Request;
 use swaf\components\handlers\Response;
 use swaf\components\handlers\Session;
@@ -45,6 +45,8 @@ class App
     public $user;
     public $userPaths;
     public $session;
+    public $isloggedin;
+    public $cerificate;
 
     public function __construct($rootpath)
     {
@@ -64,21 +66,15 @@ class App
      * @return void
      */
     public function start()
-    {
-
-      
+    {      
         // 1. Load requested HTTP Method [get,post,etc..] and fields from the request or messagebody
         $this->loadRequest();
         
-        // 2. Authenticate the user request and get userData
+        // 2. Authenticate the user request get userData and paths and set user session variables
         $this->authenticate();        
-
-        // 3. Set session variables that are user details loaded from the database
-        $this->setSessionVariables();               
         
-        // 4. Route the user to the corresponding controller
+        // 3. Route the user to the corresponding controller
         $this->route();
-
     }
 
     public function loadRequest(): void
@@ -88,25 +84,8 @@ class App
 
     public function authenticate(): void
     {      
-        if (!$this->session->get('user')->isloggedin) {
-            $auth = new UserAuthenticate($this->request);
-            $auth->authenticate();
-
-            $this->user = $auth->result;
-        } else {
-            $this->user = $this->session->get('user');
-        }
-    }
-
-    public function setSessionVariables(): void
-    {
-      
-        if (isset($this->session->get('user')->isloggedin) && !$this->session->get('user')->isloggedin) {
-            $this->session->set('user', $this->user);            
-        }
-        
-        $this->userPaths = new UserPaths($this->request);
-        $this->userPaths->get($this->session->get('user'));
+        $auth = new Authenticate($this);
+        $auth->authenticate();        
     }
 
     public function route(): void

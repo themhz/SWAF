@@ -45,10 +45,15 @@ class View
         }
 
         //make the session variables available for the layout via the session object
-        $session = 'session';
-        $$session = new Session();
-
-
+        // $session = 'session';
+         $session = new Session();
+       
+         if(isset($session->getAll()['userdetails'] )){
+            foreach($session->getAll()['userdetails'] as $key => $value) {
+                $$key = $value;
+             }
+         }         
+         
 
         ob_start();
         include_once "views/layouts/$layout.php";

@@ -4,7 +4,7 @@ namespace swaf\views\publicPages\login;
 
 use swaf\components\core\Controller as baseController;
 use swaf\components\core\View;
-use swaf\components\handlers\UserRegister;
+use swaf\components\handlers\Session;
 
 class Controller extends baseController
 {
@@ -20,17 +20,24 @@ class Controller extends baseController
         //print_r($this->app->request->body());
         //$register = new UserRegister();
         // $params = $this->app->body();
-        // print_r($this->app->session->get("user"));
-        // die();
+
+        //  echo '<pre>';
+        //   print_r($this->app->session['userdetails']);
+        // //  print_r($_SESSION);
+        //   echo '<pre>';
+        //   die();
+        
         $view = new view($this->app);
-        echo $view->render('main', 'main', $this->app->session->get("user"));
+        echo $view->render('main', 'main', $this->app->session['userdetails']);
     }
 
     public function get()
     {
-        $this->isLogout();
-        $view = new view();
-        echo $view->render('main', 'login', []);
+
+        $this->checkLogout();
+      
+         $view = new view();
+         echo $view->render('main', 'login', [], 'public');
     }
 
     public function put()
@@ -44,13 +51,14 @@ class Controller extends baseController
     }
 
 
-    public function isLogout()
+    public function checkLogout()
     {       
         $params = (object)$this->app->request->body();
-           
+        
         if (isset($params->logout) && $params->logout == 1) {
-            $this->app->session->clear();
-            header('Location: ' . 'main');            
+            $session = new Session();
+            $session->clear();
+            header('Location: ' . 'main');
         }
     }
 }
