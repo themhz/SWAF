@@ -22,7 +22,7 @@ When start runs
 
 How to USE
 ----------------------------------------------------------------
-1. You can download and set unzip the file in your web server or clone the project in your local web directory.
+1. You can download and unzip the files in your web server or clone the project in your local web directory.
 2. You need to change the config file. set the fields you need for your server
 
 define('CONFIG', array(
