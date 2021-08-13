@@ -1,3 +1,6 @@
+<?php 
+
+?>
 <div class="text-center">
   <form class="form-signin" action="login" method="POST">
 
