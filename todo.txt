@@ -4,9 +4,11 @@ Login authenticating user name and password OK
 Use php hashing on password OK and verify with database OK
 
 
-Handle user files uploads OK Cleaning
+Handle user files uploads TODO
+User Register TODO
 Error handling TODO
-Loging TODO
+Logging TODO
+Add some bootstrap in the website TODO
 
 
 Basic readme.md
