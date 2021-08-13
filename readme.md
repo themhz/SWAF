@@ -25,12 +25,12 @@ How to USE
 1. You can download and unzip the files in your web server or clone the project in your local web directory.
 2. You need to change the config file. set the fields you need for your server
 
-define('CONFIG', array(
-    'db.user' => 'root',  <= the username of the database
-    'db.password' => '',  <= the password of the database
-    'db.host' => 'localhost',<= the host or ip of the server where you have the database 
-    'db.name' => 'samplewebapp', <= and the name of the database
-));
+	define('CONFIG', array(  
+		'db.user' => 'root',  <= the username of the database  
+		'db.password' => '',  <= the password of the database  
+		'db.host' => 'localhost',<= the host or ip of the server where you have the database   
+		'db.name' => 'samplewebapp', <= and the name of the database  
+	));  
 
 3. You can now start playing around. You can have restricted pages and public pages
 for public pages you can create your own folder in views/publicPages/{the name of your folder}
