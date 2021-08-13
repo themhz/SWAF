@@ -36,10 +36,26 @@ How to USE
 for public pages you can create your own folder in views/publicPages/{the name of your folder}  
 in your folder you need to create a controller.php and a view.php. The controller has 4 basic methods in it that correspond to the http methods. I intended to make this a rest   api framework thats why I used these methods, post,get,put,delete.  
 
-4. In the methods you can use the Database class in order to access the database. This framework uses a custom ORM that selects stuf from the database check the components/core/  Model for more. I have already made some examples on how to work with the database. Check the products controller and view to see how they work.   
-   	
+4. Create a table in your database. Say the name is products and you have two fields in it like id and name
+5. then create a file in the models directory. Copy and paste one ready one and change the name of the file to correspond to the name of the table in the database and change the field within the file in the constructor. 
+
+	public function __construct()  
+    {  
+        parent::__construct('products');  
+    }  
+
+6. create the properties to correspond to the tables fields like 
+	public $id
+	public $name
+
+7.  go in the method get of your controller and create the following lines
 	$p = new Products();  
 	$p->select();
+	$view = new view($this->app->request);
+    echo $view->render('main', 'products' , $products);
+
+ In the methods(get, post, put, delete) you can use the Database class in order to access the database. This framework uses a custom ORM that selects stuf from the database  
+ Check the components/core/  Model for more. I have already made some examples on how to work with the database. Check the products controller and view to see how they work.   
 
 You can specify a more precise select like $p->select(['id = '=> 1]); you can simply play like this
 
@@ -53,7 +69,8 @@ You can specify a more precise select like $p->select(['id = '=> 1]); you can si
 
 You can you the =, and or like or any sql operators. If you see how the Model is implemented you will understand more. 
 
-5. You can pass any variables in your views and they will be shows
+8. You can pass any variables in your views and they will be usable as their names are.  
+
 use the following statement echo $view->render('main', 'main' , $products);
 Ths will load the main layout and the main view and pass in an array of $products with key value pair. 
 for example. If the array is like ['id'=> 123, 'name' = 'keyboard'] you can access the variables with their name like $id or $name
