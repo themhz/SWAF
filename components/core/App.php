@@ -30,8 +30,10 @@ use swaf\components\core\Router;
  * About
  * ----------------------------------------------------------------
  * Initialize the web application components
- * It is where everything begins. Start reading fromt he start method
-
+ * It is where everything begins. 
+ * 
+ * 
+ * Start reading from he start method
  */
 
 class App

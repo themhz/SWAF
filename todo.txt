@@ -1,10 +1,12 @@
-Basic MVC framework OK
+Basic MVC framework OK CLEANING...
 Routing OK
 Login authenticating user name and password OK
-Use php hasking on password OK
-Handle user files uploads OK
-Error handling OK
-Loging OK
+Use php hashing on password OK and verify with database OK
+
+
+Handle user files uploads OK Cleaning
+Error handling TODO
+Loging TODO
 
 
 Basic readme.md
