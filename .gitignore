@@ -1,3 +1,5 @@
+.gitignore
 vendor
 userfiles
 mvcsteps.txt
+todo.txt
