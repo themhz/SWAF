@@ -42,13 +42,14 @@ in your folder you need to create a controller.php and a view.php. The controlle
         $p->select();
 
 You can specify a more precise select like $p->select(['id = '=> 1]); you can simply play like this
-$p->select(['id = '=> 1]);
-$p->select(['id > '=> 1]);
-$p->select(['id < '=> 1]);
-$p->select(['id >= '=> 1]);
-$p->select(['id = '=> 1, 'name =', 'johny']);
-$p->select(['id = '=> 1, 'and name like', '%johny%']);
-$p->select(['id = '=> 1, 'or name like', '%johny%']);
+
+		$p->select(['id = '=> 1]);  
+		$p->select(['id > '=> 1]);  
+		$p->select(['id < '=> 1]);  
+		$p->select(['id >= '=> 1]);  
+		$p->select(['id = '=> 1, 'name =', 'johny']);  
+		$p->select(['id = '=> 1, 'and name like', '%johny%']);  
+		$p->select(['id = '=> 1, 'or name like', '%johny%']);  
 
 You can you the =, and or like or any sql operators. If you see how the Model is implemented you will understand more. 
 
