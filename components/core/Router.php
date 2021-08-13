@@ -38,12 +38,6 @@ class Router
     public function resolve()
     {
         
-//         //session_destroy();
-//           echo '<pre>';
-//           print_r($_SESSION);
-// //          print_r($this->app->userPaths->paths);
-//           echo '<pre>';
-//  die();
         try {            
             if (!$this->checkIfPageIsAdmin()) {                
                 $controller = '\swaf\views\publicPages\\' . $this->getController() . '\Controller';
